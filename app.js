@@ -5,7 +5,8 @@ import { addFriend, findFriendByName } from './data-utils.js';
 const friendsEl = document.querySelector('.friends');
 const mushroomsEl = document.querySelectorAll('.mushrooms');
 const addMushroomButton = document.getElementById('add-mushroom');
-const addFriendButton = document.getElementById('add-friend');
+const addFriendButton = document.getElementById('add-friend-button');
+const friendInput = document.getElementById('friend-input');
 // initialize state
 
 let mushroomCount = 3;
@@ -28,27 +29,31 @@ const friendData = [
         satisfaction: 2
     },
 ];
-console.log();
+console.log(friendData);
 function displayFriends() {
+    friendsEl.innerHTML = '';
+
     for (let friend of friendData) {
-        const friendEl = renderFriend(friendData);
+        const friendEl = renderFriend(friend);
 
         friendEl.addEventListener('click', () => {
-            const friendInState = findFriendByName(friendData);
+            console.log('clicked', friend);
+            // const friendInState = findFriendByName(friendData);
     
-            if (mushroomCount === 0) {
-                alert('no mushrooms left! go forage for some more');
-            }
-            if (mushroomCount > 0 && friendInState.satisfaction < 3) {
-                friendInState.happiness++;
-                mushroomCount++;
+            // if (mushroomCount === 0) {
+            //     alert('no mushrooms left! go forage for some more');
+            // }
+            // if (mushroomCount > 0 && friendInState.satisfaction < 3) {
+            //     friendInState.happiness++;
+            //     mushroomCount++;
         
-                displayFriends(friendData);
-                displayMushrooms();    
-            }
+            //     displayFriends(friendData);
+            //     displayMushrooms();    
+            // }
         });
 
         friendsEl.append(friendEl);
+
     }
 }
 
@@ -61,13 +66,16 @@ function displayMushrooms() {
     }
 }
 
+displayFriends();
 
 addFriendButton.addEventListener('click', () => {
-    const name = friendInputEl;
+    const name = friendInput.value;
 
-    addFriend(name, friendData);
+    const newFriend = addFriend(name);
 
-    friendInputEl.value = '';
+    friendInput.value = '';
+
+    friendData.push(newFriend);
 
     displayFriends(friendData);
 });

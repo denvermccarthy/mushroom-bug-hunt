@@ -1,10 +1,10 @@
-export function addFriend(friends, name) {
+export function addFriend(name) {
     const newFriend = {
         name: name || `Friend #${Math.floor(Math.random() * 1000)}`,
         satisfaction: 1
     };
     
-    friends.push(newFriend);
+    return newFriend;
 }
 
 export function findFriendByName(friends, input) {
