@@ -9,7 +9,7 @@ const addFriendButton = document.getElementById('add-friend');
 // initialize state
 
 let mushroomCount = 3;
-
+// console.log('m', mushroomCount, friendData, 'f');
 const friendData = [
     {
         name: 'Erich',
@@ -28,13 +28,13 @@ const friendData = [
         satisfaction: 2
     },
 ];
-
+console.log();
 function displayFriends() {
     for (let friend of friendData) {
         const friendEl = renderFriend(friendData);
 
         friendEl.addEventListener('click', () => {
-            const friendInState = findFriendByName(friend.name, friendData);
+            const friendInState = findFriendByName(friendData);
     
             if (mushroomCount === 0) {
                 alert('no mushrooms left! go forage for some more');
